@@ -1,16 +1,16 @@
-import { ADD_TODO, REMOVE_DATA } from '../constant'
+import { ADD_TO_TODO, REMOVE_TO_CART } from '../constants'
 import firebase from "../../config/firebase";
 export const addTodo = (data) => {
-    console.log("Add action", data)
+    console.warn("Add action", data)
     let obj = {
-        data: data
+        data: data,
+        id:Math.random()
     }
     return (dispatch) => {
-        firebase.database().ref('todos/').push(obj).then(() => {
-            console.log('set in firebase from action', obj)
+        firebase.database().ref('todos/').push(obj).then((data) => {
+            console.log('set in firebase from action', data)
         })
-        dispatch({ type: ADD_TODO, payload: obj })
-   
+        dispatch({ type: ADD_TO_TODO, payload: obj })
 
     }
 }
@@ -24,13 +24,12 @@ export const getTodoFirebase = () => {
 
     return (dispatch) => { dispatch({ type: 'GETTODO', payload: datas }) }
 
-   
-
+ 
 }
 
 export const removeTodos = (data) => {
     console.log("Remove action", data)
     return {
-        type: REMOVE_DATA,
+        type: REMOVE_TO_CART,
     }
 }

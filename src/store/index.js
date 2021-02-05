@@ -1,11 +1,7 @@
-import reducers from "./reducers";
-import { createStore,applyMiddleware } from 'redux'
-import thunk from "redux-thunk"
+import {combineReducers} from "redux"
+import cardItems from "./reducers"
 
 
-const store = createStore(
-    reducers,{},
-    applyMiddleware(thunk)
-)
-
-export default store;
+export default combineReducers({
+      cardItems,
+})
